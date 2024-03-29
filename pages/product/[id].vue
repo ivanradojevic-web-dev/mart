@@ -1,5 +1,8 @@
 <template>
-    <div class="bg-white">
+    <h1 class="text-xl font-medium text-gray-900">
+        {{ productJSON?.title }}
+    </h1>
+    <!-- <div class="bg-white">
         <div class="pb-16 pt-6 sm:pb-24">
             <nav aria-label="Breadcrumb" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <ol role="list" class="flex items-center space-x-4">
@@ -36,10 +39,12 @@
                 <div class="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
                     <div class="lg:col-span-5 lg:col-start-8">
                         <div class="flex justify-between">
-                            <h1 class="text-xl font-medium text-gray-900">{{ product.name }}</h1>
+                            <h1 class="text-xl font-medium text-gray-900">
+                                {{ productJSON?.title }}
+                            </h1>
                             <p class="text-xl font-medium text-gray-900">{{ product.price }}</p>
                         </div>
-                        <!-- Reviews -->
+           
                         <div class="mt-4">
                             <h2 class="sr-only">Reviews</h2>
                             <div class="flex items-center">
@@ -72,7 +77,7 @@
                         </div>
                     </div>
 
-                    <!-- Image gallery -->
+        
                     <div
                         class="mt-8 lg:col-span-7 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0"
                     >
@@ -96,7 +101,7 @@
 
                     <div class="mt-8 lg:col-span-5">
                         <form>
-                            <!-- Color picker -->
+             
                             <div>
                                 <h2 class="text-sm font-medium text-gray-900">Color</h2>
 
@@ -136,7 +141,7 @@
                                 </RadioGroup>
                             </div>
 
-                            <!-- Size picker -->
+                
                             <div class="mt-8">
                                 <div class="flex items-center justify-between">
                                     <h2 class="text-sm font-medium text-gray-900">Size</h2>
@@ -169,7 +174,7 @@
                                                     checked
                                                         ? 'border-transparent bg-indigo-600 text-white hover:bg-indigo-700'
                                                         : 'border-gray-200 bg-white text-gray-900 hover:bg-gray-50',
-                                                    'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1'
+                                                    'flex items-center justify-center rounded-md border px-3 py-3 text-sm font-medium uppercase sm:flex-1'
                                                 ]"
                                             >
                                                 <RadioGroupLabel as="span">{{
@@ -189,7 +194,7 @@
                             </button>
                         </form>
 
-                        <!-- Product details -->
+
                         <div class="mt-10">
                             <h2 class="text-sm font-medium text-gray-900">Description</h2>
 
@@ -209,7 +214,7 @@
                             </div>
                         </div>
 
-                        <!-- Policies -->
+            
                         <section aria-labelledby="policies-heading" class="mt-10">
                             <h2 id="policies-heading" class="sr-only">Our Policies</h2>
 
@@ -241,11 +246,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { StarIcon } from '@heroicons/vue/20/solid'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 import { CurrencyDollarIcon, GlobeAmericasIcon } from '@heroicons/vue/24/outline'
@@ -317,4 +321,10 @@ const policies = [
 
 const selectedColor = ref(product.colors[0])
 const selectedSize = ref(product.sizes[2])
+
+const route = useRoute()
+
+const { data: productJSON, error } = await useFetch(`/api/product/${route.params.id}`, {
+    key: route.params.id
+})
 </script>

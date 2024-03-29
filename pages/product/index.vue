@@ -34,7 +34,7 @@
                         <div>
                             <h3 class="text-sm text-gray-700">
                                 <NuxtLink :to="`/product/${product.id}`">
-                                    <span aria-hidden="true" class="absolute inset-0" />
+                                    <span aria-hidden="true" class="" />
                                     {{ product.title }}
                                 </NuxtLink>
                             </h3>
