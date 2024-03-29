@@ -1,0 +1,8 @@
+Prisma Seeding:
+npx prisma db seed   
+
+Prisma Migrate:
+npx prisma migrate dev name --init  
+
+Prisma Client:
+npx prisma generate           
