@@ -33,7 +33,7 @@
                     <div class="mt-4 flex justify-between">
                         <div>
                             <h3 class="text-sm text-gray-700">
-                                <NuxtLink :to="`/product/${product.id}`">
+                                <NuxtLink :to="`/products/${product.id}`">
                                     <span aria-hidden="true" class="" />
                                     {{ product.title }}
                                 </NuxtLink>

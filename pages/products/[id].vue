@@ -1,36 +1,7 @@
 <template>
     <div class="bg-white">
         <div class="pb-16 pt-6 sm:pb-24">
-            <nav aria-label="Breadcrumb" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <ol role="list" class="flex items-center space-x-4">
-                    <li>
-                        <div class="flex items-center">
-                            <NuxtLink
-                                :to="`/product`"
-                                class="mr-4 text-sm font-medium text-gray-900"
-                                >All Products
-                            </NuxtLink>
-                            <svg
-                                viewBox="0 0 6 20"
-                                aria-hidden="true"
-                                class="h-5 w-auto text-gray-300"
-                            >
-                                <path
-                                    d="M4.878 4.34H3.551L.27 16.532h1.327l3.281-12.19z"
-                                    fill="currentColor"
-                                />
-                            </svg>
-                        </div>
-                    </li>
-                    <li class="text-sm">
-                        <span
-                            aria-current="page"
-                            class="font-medium text-gray-500 hover:text-gray-600"
-                            >{{ productJSON?.title }}
-                        </span>
-                    </li>
-                </ol>
-            </nav>
+            <ProductBreadcrumb :title="productJSON?.title" />
             <div class="mx-auto mt-8 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <div class="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
                     <div class="lg:col-span-5 lg:col-start-8">
@@ -183,6 +154,7 @@
 
                             <button
                                 type="submit"
+                                @click.prevent="handleAddToCart"
                                 class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
                                 Add to cart
@@ -207,7 +179,7 @@
 <script setup>
 import { StarIcon } from '@heroicons/vue/20/solid'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-import { CurrencyDollarIcon, GlobeAmericasIcon } from '@heroicons/vue/24/outline'
+import { CurrencyDollarIcon, GlobeAmericasIcon, ShoppingCartIcon } from '@heroicons/vue/24/outline'
 
 const product = {
     name: 'Basic Tee',
@@ -277,5 +249,7 @@ if (error.value) {
 
 const basketStore = useBasketStore()
 
-console.log(basketStore.items)
+const handleAddToCart = () => {
+    basketStore.addToBasket(productJSON.value.id)
+}
 </script>
