@@ -19,5 +19,6 @@ export const useBasketStore = defineStore('basket', {
                 this.items.push({ id: productId, quantity: 1 })
             }
         }
-    }
+    },
+    persist: true
 })
