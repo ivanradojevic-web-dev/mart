@@ -274,4 +274,8 @@ const { data: productJSON, error } = await useFetch(`/api/product/${route.params
 if (error.value) {
     console.error('Error fetching product:', error.value)
 }
+
+const basketStore = useBasketStore()
+
+console.log(basketStore.items)
 </script>
