@@ -1,18 +1,15 @@
 <template>
-    <h1 class="text-xl font-medium text-gray-900">
-        {{ productJSON?.title }}
-    </h1>
-    <!-- <div class="bg-white">
+    <div class="bg-white">
         <div class="pb-16 pt-6 sm:pb-24">
             <nav aria-label="Breadcrumb" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <ol role="list" class="flex items-center space-x-4">
-                    <li v-for="breadcrumb in product.breadcrumbs" :key="breadcrumb.id">
+                    <li>
                         <div class="flex items-center">
-                            <a
-                                :href="breadcrumb.href"
+                            <NuxtLink
+                                :to="`/product`"
                                 class="mr-4 text-sm font-medium text-gray-900"
-                                >{{ breadcrumb.name }}</a
-                            >
+                                >All Products
+                            </NuxtLink>
                             <svg
                                 viewBox="0 0 6 20"
                                 aria-hidden="true"
@@ -26,12 +23,11 @@
                         </div>
                     </li>
                     <li class="text-sm">
-                        <a
-                            :href="product.href"
+                        <span
                             aria-current="page"
                             class="font-medium text-gray-500 hover:text-gray-600"
-                            >{{ product.name }}</a
-                        >
+                            >{{ productJSON?.title }}
+                        </span>
                     </li>
                 </ol>
             </nav>
@@ -42,14 +38,16 @@
                             <h1 class="text-xl font-medium text-gray-900">
                                 {{ productJSON?.title }}
                             </h1>
-                            <p class="text-xl font-medium text-gray-900">{{ product.price }}</p>
+                            <p class="text-xl font-medium text-gray-900">
+                                ${{ productJSON.price / 100 }}
+                            </p>
                         </div>
-           
+
                         <div class="mt-4">
                             <h2 class="sr-only">Reviews</h2>
                             <div class="flex items-center">
                                 <p class="text-sm text-gray-700">
-                                    {{ product.rating }}
+                                    {{ productJSON.rating }}
                                     <span class="sr-only"> out of 5 stars</span>
                                 </p>
                                 <div class="ml-1 flex items-center">
@@ -57,7 +55,7 @@
                                         v-for="rating in [0, 1, 2, 3, 4]"
                                         :key="rating"
                                         :class="[
-                                            product.rating > rating
+                                            productJSON.rating > rating
                                                 ? 'text-yellow-400'
                                                 : 'text-gray-200',
                                             'h-5 w-5 flex-shrink-0'
@@ -70,14 +68,13 @@
                                     <a
                                         href="#"
                                         class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                                        >See all {{ product.reviewCount }} reviews</a
+                                        >See all {{ productJSON.reviews }} reviews</a
                                     >
                                 </div>
                             </div>
                         </div>
                     </div>
 
-        
                     <div
                         class="mt-8 lg:col-span-7 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0"
                     >
@@ -101,11 +98,10 @@
 
                     <div class="mt-8 lg:col-span-5">
                         <form>
-             
                             <div>
                                 <h2 class="text-sm font-medium text-gray-900">Color</h2>
 
-                                <RadioGroup v-model="selectedColor" class="mt-2">
+                                <!-- <RadioGroup v-model="selectedColor" class="mt-2">
                                     <RadioGroupLabel class="sr-only"
                                         >Choose a color</RadioGroupLabel
                                     >
@@ -138,10 +134,9 @@
                                             </div>
                                         </RadioGroupOption>
                                     </div>
-                                </RadioGroup>
+                                </RadioGroup> -->
                             </div>
 
-                
                             <div class="mt-8">
                                 <div class="flex items-center justify-between">
                                     <h2 class="text-sm font-medium text-gray-900">Size</h2>
@@ -152,7 +147,7 @@
                                     >
                                 </div>
 
-                                <RadioGroup v-model="selectedSize" class="mt-2">
+                                <!-- <RadioGroup v-model="selectedSize" class="mt-2">
                                     <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>
                                     <div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
                                         <RadioGroupOption
@@ -183,7 +178,7 @@
                                             </div>
                                         </RadioGroupOption>
                                     </div>
-                                </RadioGroup>
+                                </RadioGroup> -->
                             </div>
 
                             <button
@@ -194,59 +189,19 @@
                             </button>
                         </form>
 
-
                         <div class="mt-10">
                             <h2 class="text-sm font-medium text-gray-900">Description</h2>
 
                             <div
                                 class="prose prose-sm mt-4 text-gray-500"
-                                v-html="product.description"
+                                v-html="productJSON.description"
                             />
                         </div>
-
-                        <div class="mt-8 border-t border-gray-200 pt-8">
-                            <h2 class="text-sm font-medium text-gray-900">Fabric &amp; Care</h2>
-
-                            <div class="prose prose-sm mt-4 text-gray-500">
-                                <ul role="list">
-                                    <li v-for="item in product.details" :key="item">{{ item }}</li>
-                                </ul>
-                            </div>
-                        </div>
-
-            
-                        <section aria-labelledby="policies-heading" class="mt-10">
-                            <h2 id="policies-heading" class="sr-only">Our Policies</h2>
-
-                            <dl
-                                class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2"
-                            >
-                                <div
-                                    v-for="policy in policies"
-                                    :key="policy.name"
-                                    class="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center"
-                                >
-                                    <dt>
-                                        <component
-                                            :is="policy.icon"
-                                            class="mx-auto h-6 w-6 flex-shrink-0 text-gray-400"
-                                            aria-hidden="true"
-                                        />
-                                        <span class="mt-4 text-sm font-medium text-gray-900">{{
-                                            policy.name
-                                        }}</span>
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-500">
-                                        {{ policy.description }}
-                                    </dd>
-                                </div>
-                            </dl>
-                        </section>
                     </div>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 </template>
 
 <script setup>
@@ -260,10 +215,6 @@ const product = {
     rating: 3.9,
     reviewCount: 512,
     href: '#',
-    breadcrumbs: [
-        { id: 1, name: 'Women', href: '#' },
-        { id: 2, name: 'Clothing', href: '#' }
-    ],
     images: [
         {
             id: 1,
@@ -310,14 +261,6 @@ const product = {
         'Machine wash cold with similar colors'
     ]
 }
-const policies = [
-    {
-        name: 'International delivery',
-        icon: GlobeAmericasIcon,
-        description: 'Get your order in 2 years'
-    },
-    { name: 'Loyalty rewards', icon: CurrencyDollarIcon, description: "Don't look at other tees" }
-]
 
 const selectedColor = ref(product.colors[0])
 const selectedSize = ref(product.sizes[2])
@@ -327,4 +270,8 @@ const route = useRoute()
 const { data: productJSON, error } = await useFetch(`/api/product/${route.params.id}`, {
     key: route.params.id
 })
+
+if (error.value) {
+    console.error('Error fetching product:', error.value)
+}
 </script>
