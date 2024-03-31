@@ -1,8 +1,5 @@
 <template>
-    <nav
-        aria-label="Breadcrumb"
-        class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
-    >
+    <nav aria-label="Breadcrumb" class="mx-auto mb-6 flex max-w-7xl items-center justify-between">
         <ol role="list" class="flex items-center space-x-4">
             <li>
                 <div class="flex items-center">

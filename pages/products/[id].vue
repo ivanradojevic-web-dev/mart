@@ -1,8 +1,8 @@
 <template>
     <div class="bg-white">
         <div class="pb-16 pt-6 sm:pb-24">
-            <ProductBreadcrumb :title="productJSON?.title" />
             <div class="mx-auto mt-8 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                <ProductBreadcrumb :title="productJSON?.title" />
                 <div class="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
                     <div class="lg:col-span-5 lg:col-start-8">
                         <div class="flex justify-between">
@@ -250,6 +250,6 @@ if (error.value) {
 const basketStore = useBasketStore()
 
 const handleAddToCart = () => {
-    basketStore.addToBasket(productJSON.value.id)
+    basketStore.addToBasket(productJSON.value.id, productJSON.value.price)
 }
 </script>

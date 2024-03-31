@@ -1,6 +1,7 @@
 <template>
     <div class="bg-white">
         <div class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
+            <ProductBreadcrumb title="Shopping Cart" />
             <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                 Shopping Cart
             </h1>
@@ -118,7 +119,9 @@
                     <dl class="mt-6 space-y-4">
                         <div class="flex items-center justify-between">
                             <dt class="text-sm text-gray-600">Subtotal</dt>
-                            <dd class="text-sm font-medium text-gray-900">$99.00</dd>
+                            <dd class="text-sm font-medium text-gray-900">
+                                ${{ (basketStore.subtotal / 100).toFixed(2) }}
+                            </dd>
                         </div>
                         <div
                             class="flex items-center justify-between border-t border-gray-200 pt-4"
@@ -135,7 +138,9 @@
                                     <QuestionMarkCircleIcon class="h-5 w-5" aria-hidden="true" />
                                 </a>
                             </dt>
-                            <dd class="text-sm font-medium text-gray-900">$5.00</dd>
+                            <dd class="text-sm font-medium text-gray-900">
+                                ${{ (basketStore.shippingEstimate / 100).toFixed(2) }}
+                            </dd>
                         </div>
                         <div
                             class="flex items-center justify-between border-t border-gray-200 pt-4"
@@ -152,13 +157,17 @@
                                     <QuestionMarkCircleIcon class="h-5 w-5" aria-hidden="true" />
                                 </a>
                             </dt>
-                            <dd class="text-sm font-medium text-gray-900">$8.32</dd>
+                            <dd class="text-sm font-medium text-gray-900">
+                                ${{ (basketStore.tax / 100).toFixed(2) }}
+                            </dd>
                         </div>
                         <div
                             class="flex items-center justify-between border-t border-gray-200 pt-4"
                         >
                             <dt class="text-base font-medium text-gray-900">Order total</dt>
-                            <dd class="text-base font-medium text-gray-900">$112.32</dd>
+                            <dd class="text-base font-medium text-gray-900">
+                                ${{ (basketStore.orderTotal / 100).toFixed(2) }}
+                            </dd>
                         </div>
                     </dl>
 
@@ -178,6 +187,8 @@
 
 <script setup>
 import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/vue/20/solid'
+
+const basketStore = useBasketStore()
 
 const products = [
     {
