@@ -10,15 +10,15 @@ export default defineEventHandler(async (event) => {
         return createError({ statusCode: 400, statusMessage: 'Invalid product ID' })
     }
 
-    let product = await prisma.products.findUnique({
+    const showProduct = await prisma.product.findUnique({
         where: {
             id: id
         }
     })
 
-    if (!product) {
+    if (!showProduct) {
         return createError({ statusCode: 404, statusMessage: 'Product not found' })
     }
 
-    return product
+    return showProduct
 })
