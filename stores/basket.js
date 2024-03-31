@@ -33,6 +33,13 @@ export const useBasketStore = defineStore('basket', {
             }
 
             this.calculateTotals()
+        },
+        removeProduct(productId) {
+            const itemIndex = this.items.findIndex((item) => item.id === productId)
+            if (itemIndex !== -1) {
+                this.items.splice(itemIndex, 1)
+                this.calculateTotals()
+            }
         }
     },
     persist: true

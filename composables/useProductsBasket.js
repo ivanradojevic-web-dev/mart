@@ -1,8 +1,15 @@
 export function useProductsBasket() {
     const basketStore = useBasketStore()
     const productsInBasket = ref([])
+    const isLoading = ref(false)
 
-    const fetchProductDetails = async () => {
+    async function fetchProductDetails() {
+        if (basketStore.items.length === 0) {
+            productsInBasket.value = []
+            return // Exit the function early if there are no items to fetch details for
+        }
+
+        isLoading.value = true
         try {
             const response = await fetch('/api/basket', {
                 method: 'POST',
@@ -19,11 +26,14 @@ export function useProductsBasket() {
             productsInBasket.value = await response.json()
         } catch (error) {
             console.error(error.message)
+        } finally {
+            isLoading.value = false
         }
     }
 
     return {
         productsInBasket,
-        fetchProductDetails
+        fetchProductDetails,
+        isLoading
     }
 }
