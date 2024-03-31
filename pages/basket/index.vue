@@ -9,6 +9,8 @@
                 <section aria-labelledby="cart-heading" class="lg:col-span-7">
                     <h2 id="cart-heading" class="sr-only">Items in your shopping cart</h2>
 
+                    {{ productsInBasket }}
+
                     <ul
                         role="list"
                         class="divide-y divide-gray-200 border-b border-t border-gray-200"
@@ -189,6 +191,28 @@
 import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/vue/20/solid'
 
 const basketStore = useBasketStore()
+const productsInBasket = ref([])
+
+async function fetchProductDetails() {
+    const response = await fetch('/api/basket', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ items: basketStore.items })
+    })
+
+    if (!response.ok) {
+        console.error('Failed to fetch product details')
+        return
+    }
+
+    productsInBasket.value = await response.json()
+}
+
+onMounted(() => {
+    fetchProductDetails()
+})
 
 const products = [
     {
