@@ -191,24 +191,8 @@
 import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/vue/20/solid'
 
 const basketStore = useBasketStore()
-const productsInBasket = ref([])
 
-async function fetchProductDetails() {
-    const response = await fetch('/api/basket', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ items: basketStore.items })
-    })
-
-    if (!response.ok) {
-        console.error('Failed to fetch product details')
-        return
-    }
-
-    productsInBasket.value = await response.json()
-}
+const { productsInBasket, fetchProductDetails } = useProductsBasket()
 
 onMounted(() => {
     fetchProductDetails()

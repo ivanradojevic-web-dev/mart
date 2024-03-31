@@ -27,7 +27,7 @@
                     aria-hidden="true"
                 />
                 <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{{
-                    totalItemCount
+                    basketStore.itemCount
                 }}</span>
                 <span class="sr-only">items in cart, view bag</span>
             </NuxtLink>
@@ -43,6 +43,4 @@ defineProps({
 })
 
 const basketStore = useBasketStore()
-
-const totalItemCount = computed(() => basketStore.itemCount)
 </script>
