@@ -117,9 +117,7 @@
                     </ul>
                 </div>
 
-                <div v-else class="lg:col-span-7">
-                    <p>Your basket is empty.</p>
-                </div>
+                <div v-else class="lg:col-span-7"></div>
 
                 <form
                     aria-labelledby="summary-heading"
