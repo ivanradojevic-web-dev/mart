@@ -93,32 +93,13 @@
 </template>
 
 <script setup>
-import { useForm, useField } from 'vee-validate';
-import * as yup from 'yup';
+// Dashboard guard
+definePageMeta({ middleware: "dashboard" })
 
-// Define validation schema
-const schema = yup.object({
-  title: yup.string().required(),
-  price: yup.number().required().positive().integer(),
-  rating: yup.string().required(),
-  reviews: yup.number().required().positive().integer(),
-  color: yup.string().required(),
-  size: yup.string().required(),
-  description: yup.string().required(),
-});
+// Validation product fields
+import { storeProductRequest } from '@/request/storeProductRequest'
 
-// Setup form
-const { handleSubmit, errors } = useForm({
-  validationSchema: schema,
-});
-
-const { value: title } = useField('title');
-const { value: price } = useField('price');
-const { value: rating } = useField('rating');
-const { value: reviews } = useField('reviews');
-const { value: color } = useField('color');
-const { value: size } = useField('size');
-const { value: description } = useField('description');
+const { handleSubmit, errors, title, price, rating, reviews, color, size, description } = storeProductRequest();
 
 // Submit product to API
 const { submitProduct, responseMessage, errorMessage } = useProductSubmission();

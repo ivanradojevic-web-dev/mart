@@ -74,16 +74,16 @@
 const client = useSupabaseClient()
 const user = useSupabaseUser()
 
-// watchEffect(() => {
-//     if (user.value) {
-//         return navigateTo('/')
-//     }
-// })
+watchEffect(() => {
+    if (user.value) {
+        return navigateTo('/dashboard')
+    }
+})
 
 const login = async (provider) => {
     const { data, error } = await client.auth.signInWithOAuth({
-        provider: provider
-        // redirectTo: window.location.origin
+        provider: provider,
+        redirectTo: `${window.location.origin}/dashboard` // TO RESOLVE!!!
     })
 }
 </script>

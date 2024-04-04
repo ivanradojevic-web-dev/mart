@@ -1,4 +1,4 @@
-export default defineNuxtRouteMiddleware((from, to) => {
+export default defineNuxtRouteMiddleware((to, from) => {
     const user = useSupabaseUser()
 
     if (!user.value && to.fullPath == '/dashboard') {
