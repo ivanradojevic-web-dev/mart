@@ -15,10 +15,10 @@ export function useProductSubmission() {
                 body: values
             })
 
-            responseMessage.value = responseData.body.message // Assuming the API response structure has a message field
+            responseMessage.value = responseData.body.message
         } catch (error) {
             console.error(error)
-            errorMessage.value = `Failed to submit product: ${error.message}` // $fetch provides a more detailed error object
+            errorMessage.value = `Failed to submit product: ${error.message}`
         }
     }
 
