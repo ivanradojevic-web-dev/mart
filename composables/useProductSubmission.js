@@ -1,30 +1,24 @@
 export function useProductSubmission() {
-    const responseMessage = ref('');
-    const errorMessage = ref('');
+    const responseMessage = ref('')
+    const errorMessage = ref('')
 
     async function submitProduct(values) {
-        responseMessage.value = '';
-        errorMessage.value = '';
+        responseMessage.value = ''
+        errorMessage.value = ''
 
         try {
-            const response = await fetch('/api/admin/products', {
+            const responseData = await $fetch('/api/admin/products', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(values)
-            });
+                body: values
+            })
 
-            if (!response.ok) {
-                throw new Error(`Failed to submit product: ${response.statusText}`);
-            }
-
-            const responseData = await response.json();
-
-            responseMessage.value = responseData.body.message;
+            responseMessage.value = responseData.body.message // Assuming the API response structure has a message field
         } catch (error) {
-            console.error(error.message);
-            errorMessage.value = error.message;
+            console.error(error)
+            errorMessage.value = `Failed to submit product: ${error.message}` // $fetch provides a more detailed error object
         }
     }
 
@@ -32,5 +26,5 @@ export function useProductSubmission() {
         submitProduct,
         responseMessage,
         errorMessage
-    };
+    }
 }

@@ -21,7 +21,7 @@
             </li>
         </ol>
         <div class="flex items-center space-x-4">
-            <Menu as="div" class="relative ml-3">
+            <Menu v-if="user" as="div" class="relative ml-3">
                 <div>
                     <MenuButton
                         class="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -63,7 +63,7 @@
                                 type="button"
                                 :class="[
                                     active ? 'bg-gray-100' : '',
-                                    'block px-4 py-2 text-sm text-gray-700 w-full text-left'
+                                    'block w-full px-4 py-2 text-left text-sm text-gray-700'
                                 ]"
                             >
                                 Sign out
@@ -84,9 +84,10 @@
                     class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
                 />
-                <span class="ml-2 w-4 text-sm font-medium text-gray-700 group-hover:text-gray-800">{{
-                    basketStore.itemCount
-                }}</span>
+                <span
+                    class="ml-2 w-4 text-sm font-medium text-gray-700 group-hover:text-gray-800"
+                    >{{ basketStore.itemCount }}</span
+                >
                 <span class="sr-only">items in cart, view bag</span>
             </NuxtLink>
         </div>

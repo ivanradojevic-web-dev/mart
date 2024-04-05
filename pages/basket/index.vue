@@ -201,7 +201,7 @@ import { QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
 
 const basketStore = useBasketStore()
 
-const { productsInBasket, fetchProductDetails, isLoading } = useProductsBasket()
+const { productsInBasket, fetchProductDetails, isLoading } = useProductsInBasket()
 
 onMounted(() => {
     fetchProductDetails()
