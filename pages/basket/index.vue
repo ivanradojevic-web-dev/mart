@@ -184,6 +184,7 @@
 
                     <div class="mt-6">
                         <button
+                            @click.prevent="submitOrderAction"
                             type="submit"
                             class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                         >
@@ -201,16 +202,33 @@ import { QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
 
 const basketStore = useBasketStore()
 
+// Load products in basket
 const { productsInBasket, fetchProductDetails, isLoading } = useProductsInBasket()
 
 onMounted(() => {
     fetchProductDetails()
 })
 
+// Remove product from the basket
 const removeProduct = async (productId) => {
     basketStore.removeProduct(productId)
 
     await fetchProductDetails()
+}
+
+// Create Order
+const { submitOrder, responseMessage, errorMessage } = useCreateOrder()
+
+const submitOrderAction = () => {
+    const orderDetails = {
+        orderItems: productsInBasket.value.map((item) => ({
+            productId: item.id,
+            quantity: item.quantity
+        }))
+    }
+
+    submitOrder(orderDetails)
+    // basketStore items should be empty after checkout !!!
 }
 </script>
 
