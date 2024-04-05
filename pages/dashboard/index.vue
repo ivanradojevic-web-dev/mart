@@ -3,7 +3,9 @@
         <div class="space-y-12">
             <div class="border-b border-white/10 pb-12">
                 <h2 class="text-base font-semibold leading-7 text-white">Product Information</h2>
-                <p class="mt-1 text-sm leading-6 text-gray-400">Use a permanent address where you can receive mail.</p>
+                <NuxtLink to="/products" class="mr-4 text-sm font-medium text-white">
+                    Product Page
+                </NuxtLink>
 
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <!-- Title -->

@@ -20,7 +20,7 @@
                 </span>
             </li>
         </ol>
-        <div class="flex items-center">
+        <div class="flex items-center space-x-4">
             <Menu as="div" class="relative ml-3">
                 <div>
                     <MenuButton
@@ -79,12 +79,12 @@
                 </transition>
             </Menu>
 
-            <NuxtLink to="/basket" class="group -m-2 flex w-24 items-center justify-end p-2">
+            <NuxtLink to="/basket" class="group -m-2 flex items-center justify-end p-2">
                 <ShoppingCartIcon
                     class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
                 />
-                <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{{
+                <span class="ml-2 w-4 text-sm font-medium text-gray-700 group-hover:text-gray-800">{{
                     basketStore.itemCount
                 }}</span>
                 <span class="sr-only">items in cart, view bag</span>
