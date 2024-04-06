@@ -191,6 +191,8 @@
                             Checkout
                         </button>
                     </div>
+
+                    Pay with Stripe
                 </form>
             </section>
         </div>
