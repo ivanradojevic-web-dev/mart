@@ -28,6 +28,7 @@
   "devDependencies": {
     "@nuxtjs/supabase": "^1.2.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
+    "@unlok-co/nuxt-stripe": "^2.0.0",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",

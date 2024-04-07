@@ -8,7 +8,8 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
         '@nuxtjs/supabase',
-        '@vee-validate/nuxt'
+        '@vee-validate/nuxt',
+        '@unlok-co/nuxt-stripe'
     ],
     css: ['~/assets/css/main.css'],
     postcss: {
@@ -19,5 +20,19 @@ export default defineNuxtConfig({
     },
     supabase: {
         redirect: false
+    },
+    stripe: {
+        server: {
+            key: process.env.STRIPE_SERVER_KEY,
+            options: {
+                apiVersion: '2022-11-15'
+            }
+        },
+        client: {
+            key: process.env.STRIPE_CLIENT_KEY,
+            options: {
+                // Client-side Stripe options
+            }
+        }
     }
 })

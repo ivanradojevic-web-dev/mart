@@ -192,7 +192,8 @@
                         </button>
                     </div>
 
-                    Pay with Stripe
+                    Pay with Stripe:
+                    <div>{{ stripe ? stripe : 'Loading...' }}</div>
                 </form>
             </section>
         </div>
@@ -232,6 +233,9 @@ const submitOrderAction = () => {
     submitOrder(orderDetails)
     // basketStore items should be empty after checkout !!!
 }
+
+//Stripe Payment
+const stripe = await useClientStripe()
 </script>
 
 <style scoped>
